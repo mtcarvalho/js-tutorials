@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>Apply JavaScript example</title>
+  </head>
+  <body>
+    <button>Click me</button>
+    <!-- 
+        OR just declare function in script.js with button here as:
+        <button onclick="createParagraph()">Click me!</button>
+
+        Please don't do this, however. It is bad practice to pollute your HTML with JavaScript, 
+        and it is inefficient — you'd have to include the onclick="createParagraph()" 
+        attribute on every button you want the JavaScript to apply to.
+
+    -->
+
+    <button>Click me</button>
+    <button>Click me</button>
+  </body>
+
+  <script src="script.js" defer></script> 
+  <!-- The defer attribute is a boolean attribute. 
+    When present, it specifies that the script is 
+    executed when the page has finished parsing.
+
+    we can also use async here on script tag:
+    async and defer both instruct the browser to download the script(s) in a separate thread, 
+    while the rest of the page (the DOM, etc.) is downloading, so the page loading is not blocked by the scripts.
+    If your scripts should be run immediately and they don't have any dependencies, then use async.
+    If your scripts need to wait for parsing and depend on other scripts and/or the DOM being in place, 
+    load them using defer and put their corresponding <script> elements in the order you want the browser to execute them.
+  -->
+
+</html>
