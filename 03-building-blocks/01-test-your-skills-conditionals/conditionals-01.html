@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Conditionals: Task 1</title>
+    <style>
+      p {
+        color: purple;
+        margin: 0.5em 0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <section class="preview"></section>
+
+  </body>
+  
+  
+  <script>
+    let season = 'summer';
+    let response;
+
+    // Add your code here
+
+    //Any value that is not false, undefined, null, 0, NaN, or an empty string ('') 
+    //actually returns true when tested as a conditional statement, 
+    //therefore you can use a variable name on its own to test whether it is true, 
+    //or even that it exists (that is, it is not undefined.)
+    response = (season === 'summer')? 'It\'s summer time, yey!' : 'We don\'t know what season is.';
+    response = (season === 'winter')? 'It\'s winter, wear your sockets!' : response; 
+
+    // Don't edit the code below here!
+
+    const section = document.querySelector('section');
+
+    let para1 = document.createElement('p');
+    para1.textContent = response;
+    section.appendChild(para1);
+    
+  </script>
+
+</html>
