@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Random color example — event handler attribute</title>
+    <style>
+      button {
+        margin: 10px
+      };
+    </style>
+  </head>
+  <body>
+    <!-- ALERT: DON'T USE THIS!!! -->
+    <button onclick="bgChange()">Change color</button>
+    <!--
+        The earliest method of registering event handlers found on the Web involved 
+        event handler HTML attributes (or inline event handlers) like the one shown above — 
+        the attribute value is literally the JavaScript code you want to run when the event occurs. 
+        The above example invokes a function defined inside a <script> element on the same page, 
+        but you could also insert JavaScript directly inside the attribute, for example:
+
+        <button onclick="alert('Hello, this is my old-fashioned event handler!');">Press me</button>
+
+        You can find HTML attribute equivalents for many of the event handler properties; 
+        however, you SHOULDN'T use these — they are considered bad practice. 
+        It might seem easy to use an event handler attribute if you are doing something really quick, 
+        but they quickly become unmanageable and inefficient.
+    -->
+
+    <script>
+      function random(number) {
+        return Math.floor(Math.random()*number);
+      }
+
+      function bgChange() {
+        const rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+        document.body.style.backgroundColor = rndCol;
+      }
+    </script>
+  </body>
+</html>

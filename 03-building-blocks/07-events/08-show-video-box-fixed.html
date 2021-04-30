@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Show video box example</title>
+    <style>
+      div {
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        width: 480px;
+        height: 380px;
+        border-radius: 10px;
+        background-color: #eee;
+        background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.1));
+      }
+
+      .hidden {
+        left: -50%;
+      }
+
+      .showing {
+        left: 50%;
+      }
+
+      div video {
+        display: block;
+        width: 400px;
+        margin: 40px auto;
+      }
+
+    </style>
+  </head>
+  <body>
+    <button>Display video</button>
+
+    <div class="hidden">
+      <video>
+        <source src="videos/rabbit320.mp4" type="video/mp4">
+        <source src="videos/rabbit320.webm" type="video/webm">
+        <p>Your browser doesn't support HTML5 video. Here is a <a href="rabbit320.mp4">link to the video</a> instead.</p>
+      </video>
+    </div>
+
+    <script>
+
+      const btn = document.querySelector('button');
+      const videoBox = document.querySelector('div');
+      const video = document.querySelector('video');
+
+      btn.onclick = function() {
+        videoBox.setAttribute('class','showing');
+      }
+
+      videoBox.onclick = function() {
+        videoBox.setAttribute('class','hidden');
+      };
+
+      video.onclick = function(e) {
+        e.stopPropagation();
+        video.play();
+      };
+
+      /* Fixing Event Bubbling and Capture problem with stopPropagation() */
+
+      // the standard Event object has a function available on it called stopPropagation() which, 
+      // when invoked on a handler's event object, makes it so that first handler is run but 
+      // the event doesn't bubble any further up the chain, so no more handlers will be run.
+
+      /* Notes */
+
+      /*
+        Why bother with both capturing and bubbling? Well, in the bad old days when browsers were much less 
+        cross-compatible than they are now, Netscape only used event capturing, and Internet Explorer 
+        used only event bubbling. When the W3C decided to try to standardize the behavior and reach a consensus, 
+        they ended up with this system that included both, which is the one modern browsers implemented.
+
+        As mentioned above, by default all event handlers are registered in the bubbling phase, and this makes 
+        more sense most of the time. If you really want to register an event in the capturing phase instead, 
+        you can do so by registering your handler using addEventListener(), and setting the optional third property to true.
+      */
+
+      /* Event Delegation */
+
+      /*
+        Bubbling also allows us to take advantage of event delegation — this concept relies on the fact that 
+        if you want some code to run when you select any one of a large number of child elements, 
+        you can set the event listener on their parent and have events that happen on them bubble up to their parent 
+        rather than having to set the event listener on every child individually. 
+        Remember, bubbling involves checking the element the event is fired on for an event handler first, 
+        then moving up to the element's parent, etc.
+      */
+
+    </script>
+  </body>
+</html>

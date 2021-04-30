@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Random color example — event handler attribute</title>
+    <style>
+      button {
+        margin: 10px
+      };
+    </style>
+  </head>
+  <body>
+    <button>Change color</button>
+    <script>
+      const btn = document.querySelector('button');
+
+      function random(number) {
+        return Math.floor(Math.random()*number);
+      }
+
+      function bgChange() {
+        const rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+        document.body.style.backgroundColor = rndCol;
+      }
+
+      // the modern mechanism for adding event handlers is the addEventListener() method.
+      btn.addEventListener('click', bgChange);
+
+      /*
+        This mechanism has some advantages over the older mechanisms discussed here earlier. 
+        First, there is a counterpart function, removeEventListener(), 
+        which removes a previously added event handler. 
+        For example, this would remove the event handler set in the first code block in this section:
+      */
+
+      //btn.removeEventListener('click', bgChange);
+
+      /*
+        Event handlers can also be removed by passing an AbortSignal to addEventListener() and then, 
+        later, calling abort() on the controller owning the AbortSignal. 
+        For example, to add an event handler that we can remove with an AbortSignal:
+      */
+
+      /*
+      const controller = new AbortController();
+      btn.addEventListener('click', function() {
+      var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+        document.body.style.backgroundColor = rndCol;
+      }, { signal: controller.signal }); // pass an AbortSignal to this handler
+
+      // then the event handler created by the code above can be removed like this:
+
+      controller.abort(); // removes any/all event handlers associated with this controller
+      */
+
+      /*
+        For simple, small programs, cleaning up old, unused event handlers isn’t necessary — 
+        but for larger, more complex programs, it can improve efficiency. 
+        Plus, the ability to remove event handlers allows you to have the same button 
+        performing different actions in different circumstances — all you have to do is add or remove handlers.
+      */
+
+      /*
+        The second advantage that addEventListener() has over the older mechanisms discussed here earlier 
+        is that it allows you to register multiple handlers for the same listener.
+        The following two handlers wouldn't both be applied:
+      */
+
+      //myElement.onclick = functionA;
+      //myElement.onclick = functionB;
+
+      /*
+        The second line overwrites the value of onclick set by the first line. 
+        What would work, however, is the following:
+      */
+
+      //myElement.addEventListener('click', functionA);
+      //myElement.addEventListener('click', functionB);
+
+      // both functions would now run when the element is selected.
+
+
+    </script>
+  </body>
+</html>

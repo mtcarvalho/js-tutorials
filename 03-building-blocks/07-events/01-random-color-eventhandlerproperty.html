@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Random color example — event handler property</title>
+    <style>
+      button {
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <button>Change color</button>
+    <script>
+      const btn = document.querySelector('button');
+
+      function random(number) {
+        return Math.floor(Math.random()*number);
+      }
+
+      function bgChange() {
+        const rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+        document.body.style.backgroundColor = rndCol;
+      }
+
+      /* Event Handlers */
+      // the onclick btn property is an event handler property, 
+      // and when you set it to be equal to some code,
+      // that code is run when the event fires on the button
+
+      /*
+      btn.onclick = function() {
+        const rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+        document.body.style.backgroundColor = rndCol;
+      }
+      */
+
+      // you could also set the handler property to be equal to a named function name
+
+      //btn.onclick = bgChange; 
+
+      // the color changes when the button is focused and unfocused (press tab button)
+      //btn.onfocus = bgChange; 
+      //btn.onblur = bgChange;
+
+      // the color changes only when the button is double-clicked
+      //btn.ondblclick = bgChange;
+      
+      // the color changes when a key is pressed on the keyboard
+      //window.onkeypress = bgChange; // refers to a general press (button down and then up)
+      //window.onkeydown = bgChange;
+      //window.onkeyup = bgChange;
+      // it doesn't work if you try to register this event handler on the button itself (btn)
+      // we've had to register it on the window object, which represents the entire browser window
+
+      // the color changes when the mouse pointer hovers over the button, 
+      // or when the pointer moves off the button, respectively.
+      btn.onmouseover = bgChange;
+      btn.onmouseout = bgChange;
+
+    </script>
+  </body>
+</html>

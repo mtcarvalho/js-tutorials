@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Random color event object example</title>
+    <style>
+      button {
+        margin: 10px;
+        font-size: 300%;
+        padding: 30px;
+      };
+    </style>
+  </head>
+  <body>
+    <button>Change color</button>
+    <script>
+      const btn = document.querySelector('button');
+
+      function random(number) {
+        return Math.floor(Math.random()*number);
+      }
+      
+      /* Event Objects */
+      // sometimes inside an event handler function, you'll see a parameter specified with a name such as 
+      // event, evt, or e (most commonly used, we could set any name). 
+      // this is called the event object, and it is automatically passed to event handlers 
+      // to provide extra features and information. For example, let's rewrite our random color example again slightly:
+
+      function bgChange(e) {
+        const rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+        e.target.style.backgroundColor = rndCol;
+        console.log(e);
+      }
+
+      // here you can see we are including an event object, e, in the function, and in the function setting a 
+      // background color style on e.target — which is the button itself. 
+      // the target property of the event object is always a reference to the element the event occurred upon. 
+      // so, in this example, we are setting a random background color on the BUTTON, not the PAGE.
+
+      btn.addEventListener('click', bgChange);
+    </script>
+  </body>
+</html>
